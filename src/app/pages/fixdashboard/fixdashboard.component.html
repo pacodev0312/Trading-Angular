@@ -1,0 +1,47 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Trading Dashboard</h3>
+    </div>
+    <div class="panel-body">
+      <app-trading-account (dataEvent)="receiveSelAcc($event)" ></app-trading-account>
+      <app-position-summary-info (dataEvent)="receiveColllapse($event)" [posSumm]="positionSummany" ></app-position-summary-info>
+      <!-- <app-positionsummary  *ngIf="isCollapse" [selTradeAcc]="selAcc" /> -->
+      <ul class="nav nav-tabs">
+        <li heading="Gainers" [ngClass]="{ active: selNav == 'Orderbook' }">
+          <a
+            href="javascript:void(0)"
+            (click)="handleNavSelect('Orderbook')"
+            class=""
+            >Orderbook</a
+          >
+        </li>
+        <li heading="Losers" [ngClass]="{ active: selNav == 'Tradesbook' }">
+          <a
+            href="javascript:void(0)"
+            (click)="handleNavSelect('Tradesbook')"
+            class=""
+            >Tradesbook</a
+          >
+        </li>
+        <li heading="by Value" [ngClass]="{ active: selNav === 'Positions' }">
+          <a
+            href="javascript:void(0)"
+            (click)="handleNavSelect('Positions')"
+            class=""
+            >Positions</a
+          >
+        </li>
+      </ul>
+      <ng-container *ngIf="selNav == 'Orderbook'">
+        <app-orderbook [selAcc]="selAcc" [updateDate]="updateDate" />
+      </ng-container>
+      <ng-container *ngIf="selNav == 'Tradesbook'">
+        <app-tradebook [selAcc]="selAcc" [updateDate]="updateDate" />
+      </ng-container>
+      <ng-container *ngIf="selNav == 'Positions'">
+        <app-positions [selAcc]="selAcc" [updateDate]="updateDate" />
+      </ng-container>
+    </div>
+  </div>
+</div>

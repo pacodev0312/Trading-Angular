@@ -1,0 +1,33 @@
+<div class="panel panel-default" ng-controller="newsController">
+    <div class="panel-heading">
+        <h3 class="panel-title">News - <small>Last Updated: {{updateDate | date:'HH:mm:ss'}}</small></h3>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-condensed table-small">
+                <thead>
+                    <tr>
+                        <th>
+                            Time
+                        </th>
+                        <th style="padding-left: 5px;">
+                            Symbols
+                        </th>
+                        <th style="padding-left: 5px;">
+                            Headline
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of newsHeadlines">
+                        <td style="white-space: nowrap;">{{ item.timeStamp | date:'HH:mm:ss'}}</td>
+                        <td style="white-space: nowrap; padding-left: 5px;">
+                            {{ item.symbols[0] }}
+                        </td>
+                        <td style="padding-left: 5px;"><a href="javascript:void(0)" (click)="showNewsContent(item.id)">{{item.headline}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

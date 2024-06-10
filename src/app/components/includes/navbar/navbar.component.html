@@ -1,0 +1,149 @@
+<header>
+  <div
+    class="navbar navbar-expand-lg navbar-default"
+    style="padding: 0px !important"
+  >
+    <div class="navbar-header">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" routerLink="/">
+        <img
+          class="navbar-brand-image"
+          src="../../../assets/images/logo.png"
+          alt="Logo"
+        />
+        Web TraderPro v2
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav navbar-right">
+        <ng-container *ngIf="isAuth">
+          <li>
+            <button
+              class="btn btn-sm btn-nutcracker-connect visible-md-block visible-lg-block"
+              [class.btn-success]="isfeed === 2" [class.btn-warning]="isfeed === 1" [class.btn-danger]="isfeed === 0"
+            >
+              <span class="glyphicon glyphicon-transfer"></span>{{isfeed === 2 ? 'Connected - Live Feed' : isfeed === 1 ?  'Connecting - Live Feed' : 'Disconnected - Live Feed'}}
+            </button>
+            <button
+              class="btn btn-sm btn-nutcracker-connect btn-nutcracker-connect-mobile visible-xs-block visible-sm-block btn-warning"
+              ng-class="getlsStatus()"
+            >
+              <span class="glyphicon glyphicon-transfer"></span>Connecting -
+              Delayed Feed
+            </button>
+          </li>
+          <li>
+            <a routerLink="">Welcome </a>
+          </li>
+          <li>
+            <a routerLink="/dashboard"
+              ><span class="glyphicon glyphicon-globe"></span>&nbsp;Market Data</a
+            >
+          </li>
+          <li>
+            <a routerLink="/fixdashboard"
+              ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;Trading</a
+            >
+          </li>
+          <li
+            data-ng-show="authentication.isAuth &amp;&amp; global.isTrader"
+            class="dropdown ng-hide"
+            dropdown=""
+          >
+            <a
+              routerLink="#"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              dropdown-toggle=""
+              aria-haspopup="true"
+              aria-expanded="false"
+              ><span class="glyphicon glyphicon-tags"></span>&nbsp;New Order<span
+                class="caret"
+              ></span
+            ></a>
+            <ul class="dropdown-menu" role="menu">
+              <!-- ngRepeat: oe in orderEntryTypes -->
+              <li ng-repeat="oe in orderEntryTypes" class="">
+                <a routerLink="" data-ng-click="newOrder(oe)">JSE Equity</a>
+              </li>
+              <!-- end ngRepeat: oe in orderEntryTypes -->
+              <li ng-repeat="oe in orderEntryTypes" class="">
+                <a routerLink="" data-ng-click="newOrder(oe)">Exchange Sim</a>
+              </li>
+              <!-- end ngRepeat: oe in orderEntryTypes -->
+              <li ng-repeat="oe in orderEntryTypes" class="">
+                <a routerLink="" data-ng-click="newOrder(oe)">Manual Order Manager</a>
+              </li>
+              <!-- end ngRepeat: oe in orderEntryTypes -->
+              <li ng-repeat="oe in orderEntryTypes" class="">
+                <a routerLink="" data-ng-click="newOrder(oe)"
+                  >JSE SA Derivatives Market</a
+                >
+              </li>
+              <!-- end ngRepeat: oe in orderEntryTypes -->
+              <li ng-repeat="oe in orderEntryTypes" class="">
+                <a routerLink="" data-ng-click="newOrder(oe)"
+                  >JSE SA Currencies Market</a
+                >
+              </li>
+              <!-- end ngRepeat: oe in orderEntryTypes -->
+              <li ng-repeat="oe in orderEntryTypes" class="">
+                <a routerLink="" data-ng-click="newOrder(oe)"
+                  >Nairobi Derivatives Market</a
+                >
+              </li>
+              <!-- end ngRepeat: oe in orderEntryTypes -->
+              <li ng-repeat="oe in orderEntryTypes" class="">
+                <a routerLink="" data-ng-click="newOrder(oe)">SA Agri Market</a>
+              </li>
+              <!-- end ngRepeat: oe in orderEntryTypes -->
+            </ul>
+          </li>
+          <li>
+            <a routerLink="" target="_blank"
+              ><span class="glyphicon glyphicon-question-sign"></span
+              >&nbsp;Help</a
+            >
+          </li>
+          <li>
+            <a routerLink="/about"
+              ><span class="glyphicon glyphicon-info-sign"></span>&nbsp;About</a
+            >
+          </li>
+          <li>
+            <a routerLink="/" (click)="logout()" class=""
+              ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a
+            >
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!isAuth">
+          <li
+            data-ng-hide="authentication.isAuth"
+          >
+            <a routerLink="/home"
+              ><span class="glyphicon glyphicon-th-large"></span>&nbsp;Home</a
+            >
+          </li>
+          <li
+            data-ng-hide="authentication.isAuth"
+          >
+            <a routerLink="/login"
+              ><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a
+            >
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</header>
+<ngb-progressbar id="loading-bar" class="" type="danger" *ngIf="isLoading" [value]="progress" />
